@@ -9,6 +9,7 @@ function OrdersPage() {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
 
+
     const handleSearch = async () => {
         axios.get('http://localhost:5000/api/orders?user_id=${userId}')
             .then(response => {console.log(response.data)})
@@ -16,7 +17,7 @@ function OrdersPage() {
     };
 
     return (
-        <div style={{marginLeft: '10px'}}>
+        <div style={{marginLeft: '20px'}}>
             <h1>Your Orders</h1>
             <div>
                 <input
@@ -30,13 +31,9 @@ function OrdersPage() {
             <h2>Past Orders</h2>
             {loading && <p>Loading...</p>}
             {error && <p>{error}</p>}
-            <ul>
-                {orders.map((order) => (
-                    <li key={order.order_id}>
-                        Order ID: {order.order_id}, User ID: {order.user_id}, Structures: {order.structures.join(', ')}, Status: {order.status}, Date Submitted: {order.date_submitted}
-                    </li>
-                ))}
-            </ul>
+            <div style={{marginLeft: "20px"}}>
+                d
+            </div>
         </div>
     );
 }

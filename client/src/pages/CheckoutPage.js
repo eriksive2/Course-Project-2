@@ -1,18 +1,33 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
-function CheckoutPage({  }) {
+
+function CheckoutPage({ cartItems }) {
+    const [userId, setUserID] = useState('');
+    const [cart, setCart] = useState([]);
+
+    const Axios = () => {
+        useEffect(() => {
+          axios.get(`http://localhost:5000/addCart?user_id=${userId}`)
+            .then((res) => {
+              setCart(res.data.cart);
+            })
+        }, [])
+    }
+    
+
+    
     const handleOrder = async () => {
         
     };
 
     return (
         <div>
-            <h2>Checkout</h2>
+            <h1>Checkout</h1>
             <ul>
-                {.map(item => (
-                    <li key={item.structure_id}>
-                        ID: {item.structure_id}, Type: {item.structure_type}, Quantity: {item.quantity}
+                {cart.map((cart)=>  (
+                    <li key={cart.user_id}>
+                        User ID: {cart.user_id}, Designer: {cart.designer}, Cost: {cart.total_cost}
                     </li>
                 ))}
             </ul>

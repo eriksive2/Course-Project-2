@@ -29,6 +29,9 @@ const Navbar = () => {
                 <NavLink to="/orders" activeStyle>
                     Orders
                 </NavLink>
+                <NavLink to="/checkout" activeStyle>
+                    Cart 🛒
+                </NavLink>
             </NavMenu>
         </Nav>
     );
