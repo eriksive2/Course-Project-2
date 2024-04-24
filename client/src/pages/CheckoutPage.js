@@ -1,25 +1,23 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
-
 function CheckoutPage({ cartItems }) {
     const [userId, setUserID] = useState('');
     const [cart, setCart] = useState([]);
 
-    const Axios = () => {
-        useEffect(() => {
-          axios.get(`http://localhost:5000/addCart?user_id=${userId}`)
-            .then((res) => {
-              setCart(res.data.cart);
-            })
-        }, [])
+    const handleCheckout = async () => {
     }
+    useEffect(() => {
+        axios.get(`http://localhost:5000/addCart`)
+        .then(response => {
+            console.log("checkout:...", response);
+            setCart(response.data);
+        })
+        .catch(error => {
+            console.error("Error fetching cart:...", error);
+        }); 
+    }, [])
     
-
-    
-    const handleOrder = async () => {
-        
-    };
 
     return (
         <div>
@@ -31,7 +29,7 @@ function CheckoutPage({ cartItems }) {
                     </li>
                 ))}
             </ul>
-            <button onClick={handleOrder}>Order</button>
+            <button onClick = {handleCheckout} >Order</button>
         </div>
     );
 }
