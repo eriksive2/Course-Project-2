@@ -2,10 +2,10 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
 function CheckoutPage({ cartItems }) {
-    const [userId, setUserID] = useState('');
     const [cart, setCart] = useState([]);
 
     const handleCheckout = async () => {
+
     }
     useEffect(() => {
         axios.get(`http://localhost:5000/addCart`)
@@ -23,9 +23,9 @@ function CheckoutPage({ cartItems }) {
         <div>
             <h1>Checkout</h1>
             <ul>
-                {cart.map((cart)=>  (
-                    <li key={cart.user_id}>
-                        User ID: {cart.user_id}, Designer: {cart.designer}, Cost: {cart.total_cost}
+                {cart.map((cartList)=>  (
+                    <li key={cartList.user_id}>
+                        User ID: {cartList.user_id}, Designer: {cartList.designer}, Cost: {cartList.total_cost}
                     </li>
                 ))}
             </ul>

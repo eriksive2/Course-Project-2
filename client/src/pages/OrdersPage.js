@@ -11,7 +11,7 @@ function OrdersPage() {
 
 
     useEffect(() => {
-        axios.get(`http://localhost:5000/orders`)
+        axios.get(`http://localhost:5000/api/orders`)
         .then(response => {
             console.log("your orders:...", response);
             setOrders(response.data);
@@ -22,7 +22,7 @@ function OrdersPage() {
     }, [])   
     
     const handleOrders = () => {
-        
+
     }
 
     return (
@@ -41,11 +41,13 @@ function OrdersPage() {
             {loading && <p>Loading...</p>}
             {error && <p>{error}</p>}
             <div style={{marginLeft: "20px"}}>
-            {orders.map((orders)=>  (
-                    <li key={orders.user_id}>
-                        User ID: {orders.user_id}, Designer: {orders.designer}, Cost: {orders.total_cost}
+                <ul>
+                {orders.map((order)=>  (
+                    <li key={order.user_id}>
+                        User ID: {order.user_id}, Designer: {order.designer}, Cost: {order.total_cost}
                     </li>
                 ))}
+                </ul>
             </div>
         </div>
     );
