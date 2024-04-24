@@ -7,8 +7,6 @@ const productSchema = new Schema({
   product_name:{type:String},
   price: {type:Number}
 // optional array of strings for tagging items in the cart
-
-  
 }, {
   timestamps: true,
 });

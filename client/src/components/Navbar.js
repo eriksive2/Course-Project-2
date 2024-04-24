@@ -26,6 +26,9 @@ const Navbar = () => {
                 <NavLink to="/productpage" activeStyle>
                     Product Page
                 </NavLink>
+                <NavLink to="/orders" activeStyle>
+                    Orders
+                </NavLink>
             </NavMenu>
         </Nav>
     );

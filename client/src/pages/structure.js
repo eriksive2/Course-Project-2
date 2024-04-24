@@ -67,13 +67,13 @@ const Structure = () => {
         };
         console.log(cart);
 
-
         axios.post('http://localhost:5000/addCart/add', cart)
             .then(res => {
                 console.log(res.data);
                 setShowNotification(true); 
                 setTimeout(() => setShowNotification(false), 3000); // Hide notification after 3 seconds
             });
+        
     }
     useEffect(() => {
         async function fetchData() {

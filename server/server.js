@@ -1,4 +1,5 @@
 // server.js
+const OrderModel = require('./product.model');
 
 const express = require('express');
 const mongoose = require('mongoose');
@@ -31,6 +32,11 @@ const structureRoutes = require('./routes/structureRoutes');
 
 // Use routes
 app.use("/api/Structures", structureRoutes);
+
+//order routing shit
+const orderRoutes = require("./routes/orders");
+
+app.use("/api/orders", orderRoutes);
 
 // Start the server
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));

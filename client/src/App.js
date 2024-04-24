@@ -12,6 +12,8 @@ import PageFramework from "./pages/framework";
 import ProductPage from "./pages/productpage";
 import StructureSelectionPage from "./pages/structureselectionpage";
 import Structure from "./pages/structure";
+import CheckoutPage from "./pages/CheckoutPage"
+import OrdersPage from "./pages/OrdersPage";
 
 
 function App() {
@@ -43,6 +45,12 @@ function App() {
                     path="/structure/:structure_id"
                     element={<PageFramework component={<Structure />} />}
                 />
+                <Route
+                    path="/orders"
+                    element={<PageFramework component={<OrdersPage/>}/>}/>
+                <Route 
+                    path="/checkout"
+                    element={<PageFramework component={<CheckoutPage/>}/>}/>
             </Routes>
         </Router>
     );
