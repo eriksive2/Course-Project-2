@@ -15,6 +15,7 @@ function OrdersPage() {
         .then(response => {
             console.log("your orders:...", response);
             setOrders(response.data);
+            setUserId(response.data)
         })
         .catch(error => {
             console.error("Error fetching orders:...", error);
