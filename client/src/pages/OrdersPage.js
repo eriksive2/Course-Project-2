@@ -8,10 +8,10 @@ function OrdersPage() {
     const [orders, setOrders] = useState([]);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
-
+    
 
     useEffect(() => {
-        axios.get(`http://localhost:5000/api/orders`)
+        axios.get(`http://localhost:5000/orders`)
         .then(response => {
             console.log("your orders:...", response);
             setOrders(response.data);
@@ -22,8 +22,17 @@ function OrdersPage() {
         }); 
     }, [])   
     
-    const handleOrders = () => {
-
+    const handleSearch = async () => {
+        setLoading(true);
+        const data = await axios.get(`http://localhost:5000/orders?user_id=${userId}`)
+        .then(response => {
+            console.log("your search:...", response);
+            setOrders(response.data);
+        })
+        .catch(error => {
+            console.error("Error fetching orders:...", error);
+        }); 
+        setLoading(false);
     }
 
     return (
@@ -34,21 +43,20 @@ function OrdersPage() {
                     type="text"
                     value={userId}
                     onChange={(e) => setUserId(e.target.value)}
-                    placeholder="SearchOrders (User ID)"
+                    placeholder="Search Here"
                 />
-                <button onClick={() => {handleOrders( userId ); }}>Search</button>
+                <button onClick={handleSearch}>Search</button>
             </div>
             <h2>Past Orders</h2>
             {loading && <p>Loading...</p>}
             {error && <p>{error}</p>}
             <div style={{marginLeft: "20px"}}>
-                <ul>
                 {orders.map((order)=>  (
-                    <li key={order.user_id}>
-                        User ID: {order.user_id}, Designer: {order.designer}, Cost: {order.total_cost}
-                    </li>
+                    <ul key={order.user_id}>
+                        User ID: {order.user_id}, Designer: {order.designer}, Cost: {order.total_cost}, Product Id: {order.product_id}, Ordered at: {order.createdAt}
+                    </ul>
                 ))}
-                </ul>
+                
             </div>
         </div>
     );

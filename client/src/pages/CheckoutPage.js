@@ -1,14 +1,21 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
-function CheckoutPage({ cartItems }) {
+function CheckoutPage({}) {
     const [cart, setCart] = useState([]);
 
     const handleCheckout = async () => {
-
+        axios.post('http://localhost:5000/api/orders')
+        .then(response => {
+            console.log("checkout:...", response);
+            setCart(response.data);
+        })
+        .catch(error => {
+            console.error("Error fetching cart:...", error);
+        }); 
     }
     useEffect(() => {
-        axios.get(`http://localhost:5000/addCart`)
+        axios.get(`http://localhost:5000/api/orders`)
         .then(response => {
             console.log("checkout:...", response);
             setCart(response.data);
@@ -20,16 +27,17 @@ function CheckoutPage({ cartItems }) {
     
 
     return (
-        <div>
+        <div style= {{marginLeft: "30px"}}>
             <h1>Checkout</h1>
-            <ul>
-                {cart.map((cartList)=>  (
-                    <li key={cartList.user_id}>
-                        User ID: {cartList.user_id}, Designer: {cartList.designer}, Cost: {cartList.total_cost}
-                    </li>
+            <div style={{marginLeft: "20px"}}>
+                {cart.map((cartItems)=>  (
+                    <ul key={cartItems.user_id}>
+                        User ID: {cartItems.user_id}, Designer: {cartItems.designer}, Cost: {cartItems.total_cost}, Product Id: {cartItems.product_id}, Ordered at: {cartItems.createdAt}
+                    </ul>
                 ))}
-            </ul>
-            <button onClick = {handleCheckout} >Order</button>
+                
+            </div>
+            <button onClick = {handleCheckout} style={{marginLeft:"10px"}} >Order</button>
         </div>
     );
 }
