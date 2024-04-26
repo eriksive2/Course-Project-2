@@ -32,7 +32,7 @@ const structureRoutes = require('./routes/structureRoutes');
 app.use("/api/Structures", structureRoutes);
 
 //order routing shit
-const ordersRoutes = require('./routes/orderRoute');
+const ordersRoutes = require('./routes/ordersRoute');
 
 app.use("/api/orders", ordersRoutes);
 
