@@ -1,43 +1,56 @@
-import React, { useState, useEffect } from 'react';
+// CheckoutPage.js
+import "../styles/CheckoutPage.css";
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
-function CheckoutPage({}) {
-    const [cart, setCart] = useState([]);
+const CheckoutPage = () => {
+    const [cartData, setCartData] = useState([]);
 
-    const handleCheckout = async () => {
-        axios.post('http://localhost:5000/api/orders')
-        .then(response => {
-            console.log("checkout:...", response);
-            setCart(response.data);
-        })
-        .catch(error => {
-            console.error("Error fetching cart:...", error);
-        }); 
-    }
     useEffect(() => {
-        axios.get(`http://localhost:5000/api/orders`)
-        .then(response => {
-            console.log("checkout:...", response);
-            setCart(response.data);
-        })
-        .catch(error => {
-            console.error("Error fetching cart:...", error);
-        }); 
-    }, [])
-    
+        fetchCartData();
+    }, []);
+
+    const fetchCartData = () => {
+        axios.get('http://localhost:5000/addCart')
+            .then(response => {
+                setCartData(response.data);
+            })
+            .catch(error => console.error('Error fetching cart data:', error));
+    }
+
+    const submitCartDataToOrders = () => {
+        axios.post('http://localhost:5000/orders/add', cartData)
+            .then(response => {
+                console.log('Order submitted successfully:', response.data);
+                clearCart();
+            })
+            .catch(error => console.error('Error submitting order:', error));
+    }
+
+    const clearCart = () => {
+        setCartData([]);
+    }
 
     return (
-        <div style= {{marginLeft: "30px"}}>
+        <div className="checkout-container">
             <h1>Checkout</h1>
-            <div style={{marginLeft: "20px"}}>
-                {cart.map((cartItems)=>  (
-                    <ul key={cartItems.user_id}>
-                        User ID: {cartItems.user_id}, Designer: {cartItems.designer}, Cost: {cartItems.total_cost}, Product Id: {cartItems.product_id}, Ordered at: {cartItems.createdAt}
-                    </ul>
-                ))}
-                
-            </div>
-            <button onClick = {handleCheckout} style={{marginLeft:"10px"}} >Order</button>
+            {cartData.length > 0 ? (
+                cartData.map(item => (
+                    <div className="cart-item" key={item.user_id}>
+                        <p><strong>User ID:</strong> {item.user_id}</p>
+                        <p><strong>Designer:</strong> {item.designer}</p>
+                        <p><strong>Product Name:</strong> {item.product_id}</p>
+                        <p><strong>Beds:</strong> {item.numBed}</p>
+                        <p><strong>Baths:</strong> {item.numBath}</p>
+                        <p><strong>Quantity:</strong> {item.q}</p>
+                        <p><strong>Total Cost:</strong> {item.total_cost}</p>
+                    </div>
+                ))
+            ) : (
+                <div>No items in the cart</div>
+            )}
+
+            <button onClick={submitCartDataToOrders}>Submit Order</button>
         </div>
     );
 }
