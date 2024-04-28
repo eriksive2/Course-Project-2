@@ -46,19 +46,20 @@ const CheckoutPage = () => {
         <div className="checkout-container">
             <h1>Checkout</h1>
             {cartData.length > 0 ? (
-    cartData.map((item, index) => (
-        <div className="cart-item" key={index}>
-            {Object.entries(item).map(([key, value]) => (
-                <p key={key}>
-                    <strong>{key}:</strong> {value}
-                </p>
-            ))}
-        </div>
-    ))
-) : (
-    <div>No items in the cart</div>
-)}
-
+                cartData.map(item => (
+                    <div className="cart-item" key={item.user_id}>
+                        <p><strong>User ID:</strong> {item.user_id}</p>
+                        <p><strong>Designer:</strong> {item.designer}</p>
+                        <p><strong>Product Name:</strong> {item.product_id}</p>
+                        <p><strong>Beds:</strong> {item.numBed}</p>
+                        <p><strong>Baths:</strong> {item.numBath}</p>
+                        <p><strong>Quantity:</strong> {item.q}</p>
+                        <p><strong>Total Cost:</strong> {item.total_cost}</p>
+                    </div>
+                ))
+            ) : (
+                <div>No items in the cart</div>
+            )}
 
             <button onClick={submitCartDataToOrders}>Submit Order</button>
         </div>

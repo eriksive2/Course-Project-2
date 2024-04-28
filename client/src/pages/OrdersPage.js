@@ -1,5 +1,3 @@
-// OrdersPage.js
-
 import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 
@@ -15,7 +13,6 @@ function OrdersPage() {
         .then(response => {
             console.log("your orders:...", response);
             setOrders(response.data);
-            setUserId(response.data)
         })
         .catch(error => {
             console.error("Error fetching orders:...", error);
@@ -24,15 +21,16 @@ function OrdersPage() {
     
     const handleSearch = async () => {
         setLoading(true);
-        const data = await axios.get(`http://localhost:5000/orders?user_id=${userId}`)
-        .then(response => {
+        try {
+            const response = await axios.get(`http://localhost:5000/orders?user_id=${userId}`);
             console.log("your search:...", response);
             setOrders(response.data);
-        })
-        .catch(error => {
+        } catch (error) {
             console.error("Error fetching orders:...", error);
-        }); 
-        setLoading(false);
+            setError(error.message);
+        } finally {
+            setLoading(false);
+        }
     }
 
     return (
@@ -51,15 +49,21 @@ function OrdersPage() {
             {loading && <p>Loading...</p>}
             {error && <p>{error}</p>}
             <div style={{marginLeft: "20px"}}>
-                {orders.map((order)=>  (
-                    <ul key={order.user_id}>
-                        User ID: {order.user_id}, Designer: {order.designer}, Cost: {order.total_cost}, Product Id: {order.product_id}, Ordered at: {order.createdAt}
-                    </ul>
+                {orders.map((order) => (
+                    <div key={order._id.$oid}>
+                        <h3>Order ID: {order.orderID}</h3>
+                        <ul>
+                            {order.structuresOrdered.map((structure) => (
+                                <li key={structure._id.$oid}>
+                                    User ID: {structure.user_id}, Designer: {structure.designer}, Product ID: {structure.product_id}, Beds: {structure.numBed}, Baths: {structure.numBath}, Quantity: {structure.q}, Total Cost: {structure.total_cost}
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
                 ))}
-                
             </div>
         </div>
     );
-};
+}
 
 export default OrdersPage;
