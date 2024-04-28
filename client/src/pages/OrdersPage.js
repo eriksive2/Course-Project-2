@@ -23,15 +23,18 @@ function OrdersPage() {
 
 
     const handleSearch = () =>{
-        setShowResults(true);
-        axios.get(`http://localhost:5000/orders?orderID=${orderId}`)
-        .then(response => {
-            console.log("your search came up with:...", response);
-            setOrderSearch(response.data);
-        })
-        .catch(error => {
-            console.error("Error fetching orders:...", error);
-        });
+        if(orderId != ''){
+            setShowResults(true);
+            axios.get(`http://localhost:5000/orders?orderID=${orderId}`)
+            .then(response => {
+                console.log("your search came up with:...", response);
+                setOrderSearch(response.data);
+            })
+            .catch(error => {
+                console.error("Error fetching orders:...", error);
+            });
+        }
+
 
     }
     const clearSearch = () => {
