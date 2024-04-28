@@ -1,13 +1,15 @@
 import axios from 'axios';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect} from 'react';
+
 
 function OrdersPage() {
-    const [userId, setUserId] = useState('');
+    const [orderId, setOrderId] = useState('');
+    const [orderSearch, setOrderSearch] = useState([]);
     const [orders, setOrders] = useState([]);
-    const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
-    
+    const [showResults, setShowResults] = useState(false);
 
+    //grabs the data from orders
     useEffect(() => {
         axios.get(`http://localhost:5000/orders`)
         .then(response => {
@@ -18,20 +20,25 @@ function OrdersPage() {
             console.error("Error fetching orders:...", error);
         }); 
     }, [])   
-    
-    const handleSearch = async () => {
-        setLoading(true);
-        try {
-            const response = await axios.get(`http://localhost:5000/orders?user_id=${userId}`);
-            console.log("your search:...", response);
-            setOrders(response.data);
-        } catch (error) {
+
+
+    const handleSearch = () =>{
+        setShowResults(true);
+        axios.get(`http://localhost:5000/orders?orderID=${orderId}`)
+        .then(response => {
+            console.log("your search came up with:...", response);
+            setOrderSearch(response.data);
+        })
+        .catch(error => {
             console.error("Error fetching orders:...", error);
-            setError(error.message);
-        } finally {
-            setLoading(false);
-        }
+        });
+
     }
+    const clearSearch = () => {
+        setShowResults(false);
+    }
+
+    
 
     return (
         <div style={{marginLeft: '20px'}}>
@@ -39,23 +46,40 @@ function OrdersPage() {
             <div>
                 <input
                     type="text"
-                    value={userId}
-                    onChange={(e) => setUserId(e.target.value)}
-                    placeholder="Search Here"
+                    value={orderId}
+                    onChange={(e) => setOrderId(e.target.value)}
+                    placeholder="Enter OrderID to Search"
                 />
-                <button onClick={handleSearch}>Search</button>
+                <button id="search" onClick={handleSearch}>Search</button> <button id="clear" onClick={clearSearch}>Clear</button>
             </div>
+            {showResults && (
+                <div class="searchResults">
+                <h2>Search Results</h2>
+                {orderSearch.map((order) => (
+                    <div style={{marginLeft: "20px"}} key={order._id.$oid}>
+                        <h3>Order ID: {order.orderID}</h3>
+                        <ul>
+                            {order.structuresOrdered.map((structure) => (
+                                <li key={structure._id.$oid}>
+                                    User ID: {structure.user_id}, Designer: {structure.designer}, Product ID: {structure.product_id}, Beds: {structure.numBed}, Baths: {structure.numBath}, Quantity: {structure.q}, Total Cost: {structure.total_cost} {}
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
+                ))}
+                </div>
+            )}
             <h2>Past Orders</h2>
-            {loading && <p>Loading...</p>}
             {error && <p>{error}</p>}
-            <div style={{marginLeft: "20px"}}>
+                            
+            <div id="order-hist" style={{marginLeft: "20px"}}>
                 {orders.map((order) => (
                     <div key={order._id.$oid}>
                         <h3>Order ID: {order.orderID}</h3>
                         <ul>
                             {order.structuresOrdered.map((structure) => (
                                 <li key={structure._id.$oid}>
-                                    User ID: {structure.user_id}, Designer: {structure.designer}, Product ID: {structure.product_id}, Beds: {structure.numBed}, Baths: {structure.numBath}, Quantity: {structure.q}, Total Cost: {structure.total_cost}
+                                    User ID: {structure.user_id}, Designer: {structure.designer}, Product ID: {structure.product_id}, Beds: {structure.numBed}, Baths: {structure.numBath}, Quantity: {structure.q}, Total Cost: {structure.total_cost} {}
                                 </li>
                             ))}
                         </ul>
