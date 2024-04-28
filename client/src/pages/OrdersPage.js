@@ -15,30 +15,32 @@ function OrdersPage() {
         .then(response => {
             console.log("your orders:...", response);
             setOrders(response.data);
+            setOrderSearch(response.data);
         })
         .catch(error => {
             console.error("Error fetching orders:...", error);
         }); 
     }, [])   
 
-
+    
     const handleSearch = () =>{
-        if(orderId != ''){
+        if(orderId !== ''){
             setShowResults(true);
             axios.get(`http://localhost:5000/orders?orderID=${orderId}`)
             .then(response => {
                 console.log("your search came up with:...", response);
                 setOrderSearch(response.data);
+                setOrderSearch(orderSearch => orderSearch.filter(orderId => orderSearch.orderID))
             })
             .catch(error => {
                 console.error("Error fetching orders:...", error);
             });
         }
-
-
     }
+
     const clearSearch = () => {
         setShowResults(false);
+        setOrderId("");
     }
 
     
