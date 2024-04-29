@@ -22,18 +22,27 @@ const CheckoutPage = () => {
         const data = {
             orderID: generateOrderID(), // Generate or fetch the orderID
             addtocart: cartData // Pass the cartData array
+            
         };
-
         axios.post('http://localhost:5000/orders/add', data)
             .then(response => {
                 console.log('Order submitted successfully:', response.data);
                 clearCart();
             })
             .catch(error => console.error('Error submitting order:', error));
+        
     }
 
     const clearCart = () => {
         setCartData([]);
+        axios.delete('http://localhost:5000/addCart')
+        .then(response => {
+            console.log('Order submitted successfully:', response.data);
+            let newCart = cartData.filter((el) => el.orderID !== orderID);
+
+            setCartData(newCart);
+        })
+        .catch(error => console.error('Error submitting order:', error));
     }
 
     const generateOrderID = () => {

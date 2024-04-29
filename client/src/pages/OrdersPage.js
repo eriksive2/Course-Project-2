@@ -22,7 +22,6 @@ function OrdersPage() {
         }); 
     }, [])   
 
-    
     const handleSearch = () =>{
         if(orderId !== ''){
             setShowResults(true);
@@ -30,7 +29,7 @@ function OrdersPage() {
             .then(response => {
                 console.log("your search came up with:...", response);
                 setOrderSearch(response.data);
-                setOrderSearch(orderSearch => orderSearch.filter(orderId => orderSearch.orderID))
+                setOrderSearch(orderSearch => orderSearch.filter(orderId => orderSearch.orderID !== orderId));
             })
             .catch(error => {
                 console.error("Error fetching orders:...", error);
@@ -59,19 +58,23 @@ function OrdersPage() {
             </div>
             {showResults && (
                 <div class="searchResults">
-                <h2>Search Results</h2>
-                {orderSearch.map((order) => (
-                    <div style={{marginLeft: "20px"}} key={order._id.$oid}>
-                        <h3>Order ID: {order.orderID}</h3>
-                        <ul>
-                            {order.structuresOrdered.map((structure) => (
-                                <li key={structure._id.$oid}>
-                                    User ID: {structure.user_id}, Designer: {structure.designer}, Product ID: {structure.product_id}, Beds: {structure.numBed}, Baths: {structure.numBath}, Quantity: {structure.q}, Total Cost: {structure.total_cost} {}
-                                </li>
-                            ))}
-                        </ul>
-                    </div>
-                ))}
+                    <h2>Search Results</h2>
+                    {orders.length > 0 ? (
+                        orderSearch.map((order) => (
+                            <div style={{marginLeft: "20px"}} key={order._id.$oid}>
+                                <h3>Order ID: {order.orderID}</h3>
+                                <ul>
+                                    {order.structuresOrdered.map((structure) => (
+                                        <li key={structure._id.$oid}>
+                                            User ID: {structure.user_id}, Designer: {structure.designer}, Product ID: {structure.product_id}, Beds: {structure.numBed}, Baths: {structure.numBath}, Quantity: {structure.q}, Total Cost: {structure.total_cost} {}
+                                        </li>
+                                    ))}
+                                </ul>
+                            </div>
+                        ))
+                    ) : (
+                        <div>no results found</div>
+                    )}
                 </div>
             )}
             <h2>Past Orders</h2>
