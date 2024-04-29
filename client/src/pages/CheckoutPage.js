@@ -58,7 +58,7 @@ const CheckoutPage = () => {
                     </div>
                 ))
             ) : (
-                <div>No items in the cart</div>
+                <div>No items in your cart</div>
             )}
 
             <button onClick={submitCartDataToOrders} style={{marginLeft:"450px",width:"150px", height:"60px", fontSize:"18px"}}>Submit Order</button>

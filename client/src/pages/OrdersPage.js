@@ -76,21 +76,24 @@ function OrdersPage() {
             )}
             <h2>Past Orders</h2>
             {error && <p>{error}</p>}
-                            
-            <div id="order-hist" style={{marginLeft: "20px"}}>
-                {orders.map((order) => (
-                    <div key={order._id.$oid}>
-                        <h3>Order ID: {order.orderID}</h3>
-                        <ul>
-                            {order.structuresOrdered.map((structure) => (
-                                <li key={structure._id.$oid}>
-                                    User ID: {structure.user_id}, Designer: {structure.designer}, Product ID: {structure.product_id}, Beds: {structure.numBed}, Baths: {structure.numBath}, Quantity: {structure.q}, Total Cost: {structure.total_cost} {}
-                                </li>
-                            ))}
-                        </ul>
-                    </div>
-                ))}
-            </div>
+            {orders.length > 0 ? (
+                <div id="order-hist" style={{marginLeft: "20px"}}>
+                    {orders.map((order) => (
+                        <div key={order._id.$oid}>
+                            <h3>Order ID: {order.orderID}</h3>
+                            <ul>
+                                {order.structuresOrdered.map((structure) => (
+                                    <li key={structure._id.$oid}>
+                                        User ID: {structure.user_id}, Designer: {structure.designer}, Product ID: {structure.product_id}, Beds: {structure.numBed}, Baths: {structure.numBath}, Quantity: {structure.q}, Total Cost: {structure.total_cost} {}
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
+                    ))}
+                </div>
+            ) : (
+                <div>You have no previous Orders</div>
+            )}
         </div>
     );
 }
