@@ -1,0 +1,51 @@
+/* Overall FAQ Page Container */
+.faq-page-container {
+    max-width: 800px;
+    margin: 50px auto;
+    padding: 2rem;
+    background-color: #fff; 
+    border-radius: 10px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Section Headers */
+  .faq-section h2 {
+    font-size: 2rem; 
+    color: #003366; 
+    margin-top: 3rem;
+    margin-bottom: 1rem; 
+  }
+  
+  /* Paragraphs - Questions and Answers */
+  .faq-section p {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: #444; 
+    margin-bottom: 1.5rem;
+    border-bottom: 1px solid #eeeeee; /* Adds a light border to the bottom of each answer */
+    padding-bottom: 1rem;
+  }
+  
+  /* Questions Style */
+  .faq-section strong {
+    font-weight: 600;
+    color: #0056b3;
+    margin-bottom: 0.5rem; 
+  }
+  
+  /* Subtle hover effect for interactivity */
+  .faq-section p:hover {
+    background-color: #f9f9f9;
+    cursor: pointer;
+  }
+  
+  /* Responsive Typography */
+  @media (max-width: 768px) {
+    .faq-section h2 {
+      font-size: 1.5rem;
+    }
+    .faq-section p {
+      font-size: 0.9rem;
+    }
+  }
+  

@@ -1,0 +1,29 @@
+/* ContractorsList.css */
+
+.contractors-list-container {
+    padding: 20px;
+    margin: auto;
+    max-width: 1200px; 
+    background-color: white; 
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
+  }
+  
+  .contractor-item {
+    border-bottom: 1px solid #eee; 
+    padding: 15px 0;
+  }
+  
+  .contractor-name {
+    font-size: 1.5rem;
+    color: #333;
+  }
+  
+  .contractor-details {
+    font-size: 1rem;
+    color: #666;
+    margin: 5px 0;
+  }
+  
+  
+  
