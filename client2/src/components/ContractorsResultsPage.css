@@ -1,0 +1,115 @@
+/* ContractorsResultsPage.css */
+
+.companies-results-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #f4f4f4; /* Light grey background for the page */
+  padding: 2rem 0;
+}
+
+.company-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 70%;
+  max-width: 800px;
+  margin: 2rem;
+  background: #ffffff;
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.1);
+  padding: 2rem;
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.company-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0px 15px 30px rgba(0, 0, 0, 0.2);
+}
+
+.company-card img {
+  display: block; /* Makes it a block element */
+  margin: 5%; /* Centers the logo */
+  width:30%
+}
+
+.company-card h2 {
+  font-size: 2rem; /* Larger font size for company name */
+  color: #f80000;
+  margin: 0.5rem 0;
+  font-weight: bold;
+  text-align: center;
+}
+
+.company-card p,
+.company-card a {
+  font-size: 1rem;
+  color: #000000; /* Darker font color for better readability */
+  line-height: 1.6;
+  text-align: center;
+  margin: 0.5rem 0;
+  font-weight: bold;
+}
+
+.company-card a {
+  color: #007bff;
+  transition: color 0.2s;
+}
+
+.company-card a:hover {
+  color: #0056b3;
+  text-decoration: underline; /* Remove underline effect */
+}
+
+.company-actions {
+  display: flex;
+  justify-content: center;
+  gap: 10px; /* Adds space between buttons */
+  margin-top: 1.5rem;
+}
+
+.button {
+  background-color: #007bff; /* Primary button color */
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.2s, box-shadow 0.2s;
+}
+
+.button:hover {
+  background-color: #0056b3;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+}
+
+/* Styling for the rating and type tags */
+.rating,
+.type {
+  display: inline-block;
+  background-color: #ffc107; /* Gold color for rating */
+  padding: 5px 10px;
+  border-radius: 5px;
+  margin: 5px 0;
+  font-weight: 500;
+  font-weight: bold;
+  justify-content: center; /* Centers the buttons container */
+}
+
+.type {
+  background-color: #28a745; /* Green color for type */
+}
+
+/* Responsive design adjustments */
+@media (max-width: 768px) {
+  .company-card {
+    width: 90%; /* Full width on smaller screens */
+  }
+
+  .company-actions {
+    flex-direction: column; /* Stack buttons vertically on smaller screens */
+  }
+}

@@ -1,0 +1,15 @@
+/* components/SearchResults.css */
+.SearchResults {
+    padding: 1rem;
+  }
+  
+  .result-item {
+    margin-bottom: 1rem;
+    padding: 1rem;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .result-item h3 {
+    margin: 0;
+  }
+  

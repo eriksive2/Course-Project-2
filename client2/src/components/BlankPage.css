@@ -1,0 +1,11 @@
+/* components/BlankPage.css */
+.BlankPage {
+    text-align: center;
+    padding: 5rem;
+  }
+  
+  .BlankPage h2 {
+    font-size: 3rem;
+    color: #333;
+  }
+  

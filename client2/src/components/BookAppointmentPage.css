@@ -1,0 +1,50 @@
+/* BookAppointmentPage.css */
+
+.book-appointment-container {
+    max-width: 600px; /* Adjust the width of the form as needed */
+    margin: 2rem auto; /* Center the form on the page with margin */
+    padding: 2rem; /* Add padding inside the container */
+    background: #FFFFFF; /* Set the background to white */
+    border-radius: 8px; /* Slightly rounded corners for the container */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* A subtle shadow */
+    text-align: center; /* Center the text */
+  }
+  
+  .book-appointment-container h1 {
+    margin-bottom: 1rem; /* Space below the heading */
+    color: #333; /* Dark color for the text */
+  }
+  
+  .book-appointment-container form {
+    display: flex;
+    flex-direction: column; /* Stack the form items vertically */
+  }
+  
+  .book-appointment-container label {
+    text-align: left; /* Align the labels to the left */
+    margin-top: 1rem; /* Space above each label */
+  }
+  
+  .book-appointment-container input,
+  .book-appointment-container select,
+  .book-appointment-container button {
+    padding: 0.5rem; /* Padding inside each input, select, and button */
+    margin-top: 0.5rem; /* Space above each input, select, and button */
+    border: 1px solid #CCC; /* A light border for inputs and select */
+    border-radius: 4px; /* Slightly rounded corners for inputs and select */
+  }
+  
+  .book-appointment-container button {
+    background-color: #004a99; /* A blue background for the button */
+    color: white; /* White text within the button */
+    border: none; /* No border for the button */
+    cursor: pointer; /* Pointer cursor on hover */
+    margin-top: 1.5rem; /* More space above the button */
+  }
+  
+  .book-appointment-container button:hover {
+    background-color: #003366; /* Darken the button background on hover */
+  }
+  
+  /* If you have additional elements or need further customization, add them here */
+  

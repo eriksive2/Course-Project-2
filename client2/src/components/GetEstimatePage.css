@@ -1,0 +1,49 @@
+.estimate-container {
+    max-width: 600px;
+    margin: auto;
+    padding: 20px;
+    background: #FFFFFF;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+  }
+  
+  .estimate-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .estimate-form label {
+    margin-bottom: 5px;
+    font-weight: bold;
+    text-align: left;
+  }
+  
+  .estimate-form select {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  .submit-btn {
+    padding: 10px 15px;
+    background-color: #004a99;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    margin-top: 20px;
+    cursor: pointer;
+  }
+  
+  .submit-btn:hover {
+    background-color: #003366;
+  }
+  
+  /* Adjustments for smaller screens */
+  @media (max-width: 768px) {
+    .estimate-container {
+      width: auto;
+      padding: 10px;
+    }
+  }
+  
