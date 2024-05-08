@@ -18,11 +18,19 @@ router.route('/add').post((req, res) => {
   const tags = req.body.tags;
 
 
-  const AddtoCart = new addCart({user_id,designer,product_id,total_cost,numBed,numBath,q,tags});
+
+  const AddtoCart = new addCart({user_id,designer,product_id,total_cost,numBed,numBath,q,tags, cartID});
 
   AddtoCart.save()
     .then(() => res.json('Item added to Cart!'))
     .catch(err => res.status(400).json('Error: ' + err));
 });
+
+// router.route(`/${user_id}`).delete((req, res) => {
+//   addCart.find({user_id: req.query.user_id})
+//     .then(items => res.json(items))
+//     .catch(err => res.status(400).json('Error: ' + err));
+// });
+
 
 module.exports = router;

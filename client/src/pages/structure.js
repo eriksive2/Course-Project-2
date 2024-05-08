@@ -14,10 +14,11 @@ const Structure = () => {
     const { structure_id } = useParams();
 
     const [quantity, setQuantity] = useState(1);
-   
+    
     const [bath, setBath] = useState(1);
 
     const [bed, setBed] = useState(1);
+    const [cartData, setCartData] = useState([]);
 
    
 
@@ -64,6 +65,7 @@ const Structure = () => {
             numBath: convertBath,
             q: convertQuantity,
             total_cost: structure.price * convertQuantity,
+
         };
         console.log(cart);
 
@@ -89,6 +91,8 @@ const Structure = () => {
 
         fetchData();
     }, [structure_id]);
+    
+
 
     useEffect(() => {
         if (!structure) return;
@@ -115,7 +119,7 @@ const Structure = () => {
     if(structure === null) {
         return <div>Loading...</div>;
     }
-
+    
     return (
 
                     <div style={{ marginLeft: "10px" }}>

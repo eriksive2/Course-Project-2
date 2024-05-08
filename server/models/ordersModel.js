@@ -12,6 +12,7 @@ const AddtoCartSchema = new Schema({
     q: { type: Number, required: true },
     total_cost: { type: Number, required: true },
     tags: [{ type: String, required: false }],
+
 }, {
     timestamps: true,
 });
